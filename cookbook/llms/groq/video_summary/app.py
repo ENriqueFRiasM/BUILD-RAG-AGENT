@@ -2,6 +2,8 @@ import streamlit as st
 from phi.tools.youtube_tools import YouTubeTools
 
 from assistant import get_chunk_summarizer, get_video_summarizer  # type: ignore
+# For an assistant in Portuguese, uncomment this line and comment the top line
+#from assistant_pt_br import get_chunk_summarizer, get_video_summarizer  # type: ignore
 
 st.set_page_config(
     page_title="Youtube Video Summaries",
@@ -36,6 +38,10 @@ def main() -> None:
 
     # Get video url
     video_url = st.sidebar.text_input(":video_camera: Video URL")
+    # Get video language 
+    video_language = st.sidebar.selectbox(
+        "Select the video language", options=["en", "pt"]
+    )
     # Button to generate report
     generate_report = st.sidebar.button("Generate Summary")
     if generate_report:
@@ -53,7 +59,7 @@ def main() -> None:
 
     if "youtube_url" in st.session_state:
         _url = st.session_state["youtube_url"]
-        youtube_tools = YouTubeTools(languages=["en"])
+        youtube_tools = YouTubeTools(languages=[video_language])
         video_captions = None
         video_summarizer = get_video_summarizer(model=llm_model)
 

@@ -21,6 +21,7 @@ def get_chunk_summarizer(
             "Give the section relevant titles and provide details/facts/processes in each section."
             "REMEMBER: you are writing for the New York Times, so the quality of the report is important.",
             "Make sure your report is properly formatted and follows the <report_format> provided below.",
+            "The report must be written in {English}, even if the structure or question is in another language.",
         ],
         add_to_system_prompt=dedent(
             """
